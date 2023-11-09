@@ -51,6 +51,8 @@ public class FXMLInicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        tfNumPersonal.setText("12345");
+        tfPassword.setText("password1");
         
     }
 
@@ -100,7 +102,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void mostrarPantallaPrincipal(RespuestaLogin usuario){
         try {
             Stage escenarioActual = (Stage) tfNumPersonal.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(controlnutricional.ControlNutricional.class.getResource("vista/FXMLHome.fxml"));
+            FXMLLoader loader = Utilidades.cargarVista("vista/FXMLHome.fxml");
             Parent vista = loader.load();
             FXMLHomeController home = loader.getController();
             

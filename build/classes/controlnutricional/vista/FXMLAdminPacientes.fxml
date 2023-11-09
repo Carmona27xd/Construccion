@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controlnutricional.controlador.FXMLAdminPacientesController">
+   <children>
+      <Pane prefHeight="115.0" prefWidth="800.0" style="-fx-background-color: #18529D;">
+         <children>
+            <Label layoutX="176.0" layoutY="14.0" text="Administracion de pacientes" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="74.0" fitWidth="86.0" layoutX="20.0" layoutY="21.0" onMouseClicked="#ivVolver" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/previous.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="115.0" prefHeight="556.0" prefWidth="800.0">
+         <children>
+            <TextField fx:id="tfBuscarPaciente" layoutX="14.0" layoutY="28.0" prefHeight="31.0" prefWidth="232.0" promptText="Buscar paciente" />
+            <Button layoutX="314.0" layoutY="28.0" mnemonicParsing="false" onAction="#btAgregar" prefHeight="31.0" prefWidth="86.0" text="Agregar" />
+            <Button layoutX="455.0" layoutY="28.0" mnemonicParsing="false" onAction="#btModificar" prefHeight="31.0" prefWidth="86.0" text="Modificar" />
+            <Button layoutX="610.0" layoutY="28.0" mnemonicParsing="false" onAction="#btEliminar" prefHeight="31.0" prefWidth="86.0" text="Eliminar" />
+            <TableView fx:id="twTablaPacientes" layoutX="14.0" layoutY="78.0" prefHeight="464.0" prefWidth="773.0">
+              <columns>
+                <TableColumn fx:id="tcNombre" prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="tcApellidoPaterno" prefWidth="75.0" text="Apellido Paterno" />
+                  <TableColumn fx:id="tcApellidoMaterno" prefWidth="75.0" text="Apellido Materno" />
+                  <TableColumn fx:id="tcEstatura" prefWidth="75.0" text="Estatura" />
+                  <TableColumn fx:id="tcFechaNacimineto" prefWidth="75.0" text="Fecha de nacimiento" />
+                  <TableColumn fx:id="tcCorreo" prefWidth="75.0" text="Correo" />
+                  <TableColumn fx:id="tcMunicipio" prefWidth="75.0" text="Municipio" />
+                  <TableColumn fx:id="tcEstado" prefWidth="75.0" text="Estado" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

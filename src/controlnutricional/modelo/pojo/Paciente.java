@@ -9,6 +9,7 @@ package controlnutricional.modelo.pojo;
  * @author Carmona
  */
 public class Paciente {
+    
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -17,9 +18,19 @@ public class Paciente {
     private String fechaNacimiento;
     private Integer idNutriologo;
     private Integer idEstado;
-    private Integer estado;
+    private String estado;
     
     public Paciente() {
+    }
+    
+    private int idPaciente;
+
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public Integer getIdEstado() {
@@ -30,11 +41,11 @@ public class Paciente {
         this.idEstado = idEstado;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
     private byte[] foto; 

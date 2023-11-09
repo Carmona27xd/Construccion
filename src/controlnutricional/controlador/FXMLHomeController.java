@@ -5,8 +5,11 @@
 package controlnutricional.controlador;
 
 import controlnutricional.modelo.pojo.Nutriologo;
+import controlnutricional.utils.Utilidades;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -65,5 +69,24 @@ public class FXMLHomeController implements Initializable {
         }
         
         
+    }
+
+    @FXML
+    private void btIrAdminPacientes(ActionEvent event) {
+        try {
+            FXMLLoader loader = Utilidades.cargarVista("vista/FXMLAdminPacientes.fxml");
+            Parent vista = loader.load();
+            Scene escena = new Scene(vista);
+            FXMLAdminPacientesController controlador = loader.getController();
+            controlador.inicializarInformacion(nutriologoSesion.getIdNutriologo());
+            
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Pacientes");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

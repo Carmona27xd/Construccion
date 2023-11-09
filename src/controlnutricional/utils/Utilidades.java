@@ -4,6 +4,9 @@
  */
 package controlnutricional.utils;
 
+import java.io.IOException;
+import java.net.URL;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 
 /**
@@ -18,5 +21,10 @@ public class Utilidades {
         alertaSimple.setContentText(mensaje);
         alertaSimple.setHeaderText(null);
         alertaSimple.showAndWait();
+    }
+    
+    public static FXMLLoader cargarVista(String rutaFXML) throws IOException{
+        URL url = controlnutricional.ControlNutricional.class.getResource(rutaFXML);
+        return new FXMLLoader(url);
     }
 }
