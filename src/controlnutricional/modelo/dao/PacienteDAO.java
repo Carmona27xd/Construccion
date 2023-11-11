@@ -26,7 +26,7 @@ public class PacienteDAO {
         Connection conexionBD = ConexionBD.obtenerConexion();
         if (conexionBD != null) {
             try {
-                String consulta = "SELECT idPaciente, p.nombre, apellidoPaterno, apellidoMaterno, estatura" + 
+                String consulta = "SELECT idPaciente, p.nombre, apellidoPaterno, apellidoMaterno, estatura, " + 
                 "correo, fechaNacimiento, p.idMunicipio, m.nombre AS municipio, \n" +
                 "m.idEstado, e.nombre AS estado \n " +
                 "FROM \n" +

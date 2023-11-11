@@ -4,17 +4,25 @@
  */
 package controlnutricional.controlador;
 
+import controlnutricional.modelo.dao.PacienteDAO;
 import controlnutricional.modelo.pojo.Paciente;
+import controlnutricional.utils.Utilidades;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -24,27 +32,28 @@ import javafx.scene.input.MouseEvent;
 public class FXMLAdminPacientesController implements Initializable {
     
     private int idNutriologo;
+    private ObservableList<Paciente> pacientes;
 
     @FXML
     private TextField tfBuscarPaciente;
     @FXML
     private TableView<Paciente> twTablaPacientes;
     @FXML
-    private TableColumn<?, ?> tcNombre;
+    private TableColumn tcNombre;
     @FXML
-    private TableColumn<?, ?> tcApellidoPaterno;
+    private TableColumn tcApellidoPaterno;
     @FXML
-    private TableColumn<?, ?> tcApellidoMaterno;
+    private TableColumn tcApellidoMaterno;
     @FXML
-    private TableColumn<?, ?> tcEstatura;
+    private TableColumn tcEstatura;
     @FXML
-    private TableColumn<?, ?> tcFechaNacimineto;
+    private TableColumn tcFechaNacimineto;
     @FXML
-    private TableColumn<?, ?> tcCorreo;
+    private TableColumn tcCorreo;
     @FXML
-    private TableColumn<?, ?> tcMunicipio;
+    private TableColumn tcMunicipio;
     @FXML
-    private TableColumn<?, ?> tcEstado;
+    private TableColumn tcEstado;
 
     /**
      * Initializes the controller class.
@@ -52,10 +61,12 @@ public class FXMLAdminPacientesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        configurarTabla();
     }
 
     public void inicializarInformacion(int idNutriologo){
         this.idNutriologo = idNutriologo;
+        obtenerInformacionPacientes();
     }
     
     private void configurarTabla(){
@@ -64,12 +75,33 @@ public class FXMLAdminPacientesController implements Initializable {
         this.tcApellidoMaterno.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
         this.tcCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
         this.tcEstatura.setCellValueFactory(new PropertyValueFactory("estatura"));
-        
-        
+        this.tcEstado.setCellValueFactory(new PropertyValueFactory("estado"));
+        this.tcMunicipio.setCellValueFactory(new PropertyValueFactory("municipio"));
+        this.tcFechaNacimineto.setCellValueFactory(new PropertyValueFactory("fechaNacimiento"));
+    }
+    
+    private void obtenerInformacionPacientes(){
+        try {
+            HashMap<String, Object> respuesta = PacienteDAO
+                    .obtenerPacientesNutriologo(idNutriologo);
+            if (!(boolean)respuesta.get("error")) {
+                pacientes = FXCollections.observableArrayList();
+                ArrayList<Paciente> lista = (ArrayList<Paciente>) respuesta.get("pacientes");
+                pacientes.addAll(lista);
+                twTablaPacientes.setItems(pacientes);
+            }else{
+                Utilidades.mostrarAlertaSimple("Error", "" + respuesta.get("mensaje"),
+                        Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void ivVolver(MouseEvent event) {
+        Stage escenario = (Stage) tfBuscarPaciente.getScene().getWindow();
+        escenario.close();
     }
 
     @FXML
